@@ -16,7 +16,7 @@ const typeDefs = gql `
         username: String
         password: String
         createdAt: DateTime
-        updatedAt: String
+        updatedAt: DateTime
     }
 
     type Query {
@@ -28,6 +28,6 @@ const typeDefs = gql `
     }
 `
 
-module.exports =  [
+module.exports = [
     typeDefs
 ]

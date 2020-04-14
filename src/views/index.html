@@ -4,16 +4,71 @@
 <head>
     <meta charset="UTF-8">
     <title>MY APP</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#createUser").click(function() {
+                const name = document.getElementById("userName").value;
+                const pwd = document.getElementById("userPwd").value;
+                $.ajax({
+                    url: "http://localhost:4000/graphql",
+                    contentType: "application/json",
+                    type: 'POST',
+                    data: JSON.stringify({
+                        query: `mutation {
+                            createUser(username:"${name}", password:"${pwd}") {
+                                username
+                                password
+                            }
+                        }`
+                    }),
+                    success: function(result) {
+                        console.log(result);
+                        if (result.data.createUser != null)
+                            document.getElementById("desc").innerHTML = "Registration success.";
+                        else
+                            document.getElementById("desc").innerHTML = "Registration failed.";
+                    }
+                });
+            });
+
+            $("#Login").click(function() {
+                const name = document.getElementById("userName").value;
+                const pwd = document.getElementById("userPwd").value;
+                $.ajax({
+                    url: "http://localhost:4000/graphql",
+                    contentType: "application/json",
+                    type: 'POST',
+                    data: JSON.stringify({
+                        query: `query {
+                            authenticate(username:"${name}", password:"${pwd}") {
+                                username
+                                password
+                            }
+                        }`
+                    }),
+                    success: function(result) {
+                        console.log(result);
+                        if (result.data.authenticate != null)
+                            document.getElementById("desc").innerHTML = "Login success.";
+                        else
+                            document.getElementById("desc").innerHTML = "Login failed.";
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 
 <body>
     <h1> May Node and Express be with you. </h1>
 
-    <form action="/Register" method="POST">
-        <input type="text" placeholder="User Name" name="userName" required>
-        <input type="password" placeholder="Password" name="userPwd" required>
-        <button type="submit">add user</button>
-    </form>
+    <input type="text" placeholder="User Name" name="userName" id="userName" required>
+    <input type="password" placeholder="Password" name="userPwd" id="userPwd" required>
+    <button id="createUser">add</button>
+    <button id="Login">signin</button>
+    <div id="desc"></div>
+
 </body>
 
 </html>
