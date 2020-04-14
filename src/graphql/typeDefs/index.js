@@ -1,14 +1,26 @@
-const { gql } = require('apollo-server-express')
+const { gql } = require('apollo-server-express');
+
+const { DateTime } = require('../customScalars');
 
 const typeDefs = gql `
+    scalar DateTime
+
     type User {
         id: Int!
         username: String!
         password: String!
     }
 
+    type AuthResponse {
+        id: Int
+        username: String
+        password: String
+        createdAt: DateTime
+        updatedAt: String
+    }
+
     type Query {
-        user(id: Int!): User
+        authenticate(username: String!, password: String!): AuthResponse
     }
 
     type Mutation {

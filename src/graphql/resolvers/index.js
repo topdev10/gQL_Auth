@@ -2,8 +2,8 @@ const bcrypt = require('bcryptjs')
 
 const resolvers = {
     Query: {
-        async user(root, { id }, { dataSources }) {
-            return dataSources.userAPI.getById(id)
+        async authenticate(root, { username, password }, { dataSources }) {
+            return dataSources.userAPI.authUser({username, password})
         }
     },
 

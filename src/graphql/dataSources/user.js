@@ -47,7 +47,17 @@ class UserAPI extends DataSource {
       }) // If transaction is passed, set transaction
       return result
     }
-  
+
+    /**
+     * Authenticate User with username and Password
+     * @param {String} username
+     * @param {String} password
+     */
+
+    authUser = async ({username, password}) => {
+        const result = await this.models.User.findOne({ where: { username, password } });
+        return result;
+    }
     /**
      * Updates user
      * @param {Object} user
