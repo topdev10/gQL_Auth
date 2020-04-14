@@ -1,7 +1,10 @@
 const express = require('express');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const apolloServer = require('./src');
 
 const app = express();
+
+apolloServer.applyMiddleware({ app });
 
 // Listen-------------------
 app.listen(3000, function() {
@@ -16,6 +19,6 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html')
 })
 
-app.post('/Login', (req, res) => {
-    console.log(req.body);
+app.post('/Register', (req, res) => {
+    console.log(req.body.userName);
 })
