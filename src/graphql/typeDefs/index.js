@@ -1,6 +1,4 @@
-// src/schema.js
-
-const { gql } = require('apollo-server')
+const { gql } = require('apollo-server-express')
 
 const typeDefs = gql `
     type User {
@@ -18,4 +16,6 @@ const typeDefs = gql `
     }
 `
 
-module.exports = typeDefs
+module.exports =  [
+    typeDefs
+]

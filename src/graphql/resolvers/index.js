@@ -1,5 +1,3 @@
-// src/resolvers.js
-
 const bcrypt = require('bcryptjs')
 
 const resolvers = {
@@ -19,4 +17,4 @@ const resolvers = {
     },
 }
 
-module.exports = resolvers
+module.exports = resolvers;
