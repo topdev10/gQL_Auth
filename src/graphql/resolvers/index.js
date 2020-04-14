@@ -2,17 +2,14 @@ const bcrypt = require('bcryptjs')
 
 const resolvers = {
     Query: {
-        async user(root, { id }, { models }) {
-            return models.User.findById(id)
+        async user(root, { id }, { dataSources }) {
+            return dataSources.userAPI.getById(id)
         }
     },
 
     Mutation: {
-        async createUser(root, { name, password }, { models }) {
-            return models.User.create({
-                name,
-                password: await bcrypt.hash(password, 10)
-            })
+        async createUser(root, { username, password }, { dataSources }) {
+            return dataSources.userAPI.createUser({username, password});
         }
     },
 }

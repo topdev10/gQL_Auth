@@ -6,7 +6,7 @@ const resolvers = require('./resolvers');
 const apolloServer = new ApolloServer({
     typeDefs,
     resolvers,
-    context: { dataSources }
+    dataSources
 });
 
 // server
